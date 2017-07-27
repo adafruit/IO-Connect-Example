@@ -62,7 +62,7 @@ class ViewController: UIViewController {
     func postAccelerometerDataX() {
         
         let parameters = ["value": "\(String(format: "%.02f", (motionManager.accelerometerData?.acceleration.x)!))"]
-        guard let url = URL(string: "https://io.adafruit.com/api/feeds/incoming/data.json?X-AIO-Key=c04d002a910e4eff85e6b83203d4e287") else { return }
+        guard let url = URL(string: "https://io.adafruit.com/api/feeds/Your-Feed-Key-Here/data.json?X-AIO-Key=Your-AIO-Key-Here") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
