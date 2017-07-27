@@ -304,6 +304,7 @@
 				D50BEFAF1F2658EC00914840 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

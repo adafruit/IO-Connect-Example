@@ -10,23 +10,30 @@ import UIKit
 import CoreMotion
 
 class ViewController: UIViewController {
+   
+     var motionManager = CMMotionManager()
 
-    
-    var motionManager = CMMotionManager()
-    
-    @IBOutlet weak var accelTagX: UILabel!
-    
-    @IBOutlet weak var accelSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         startAccelerometerX()
-        self.accelTagX.text = "--"
-
     }
 
+      
+    @IBOutlet weak var accelTagX: UILabel!
     
+    @IBOutlet weak var accelSwitch: UISwitch!
     
+    @IBAction func stateChange(_ sender: UISwitch) {
+        if (sender.isOn == true){
+            startAccelerometerX()
+            
+        }else {
+            stopAccelerometerX()
+        }
+    }
+    
+  
     func startAccelerometerX () {
         print("Start Acceleromter Updates")
         motionManager.accelerometerUpdateInterval = 2.5
@@ -44,6 +51,7 @@ class ViewController: UIViewController {
         })
     }
 
+    
     func stopAccelerometerX () {
         self.motionManager.stopAccelerometerUpdates()
         self.accelTagX.text = "--"
@@ -51,30 +59,10 @@ class ViewController: UIViewController {
     }
 
     
-    
-    
-    
-    
-    /*
-     //for accelerometer x
-     @IBAction func stateChange(_ sender: UISwitch) {
-     if (sender.isOn == true){
-     self.aSwitchY.setOn(false, animated: true)
-     self.aSwitchZ.setOn(false, animated: true)
-     startAccelerometerX()
-     
-     }else {
-     stopAccelerometerX()
-     }
-     }
-     
-
- */
-    
     func postAccelerometerDataX() {
         
         let parameters = ["value": "\(String(format: "%.02f", (motionManager.accelerometerData?.acceleration.x)!))"]
-        guard let url = URL(string: "https://io.adafruit.com/api/feeds/your-Feed-Key-Here/data.json?X-AIO-Key=Your-A-IO-Key-Here") else { return }
+        guard let url = URL(string: "https://io.adafruit.com/api/feeds/incoming/data.json?X-AIO-Key=c04d002a910e4eff85e6b83203d4e287") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -96,8 +84,6 @@ class ViewController: UIViewController {
             }
             }.resume()
     }
-
-    
     
 
 }
